@@ -63,12 +63,12 @@ class MainActivity : AppCompatActivity() {
      */
     private fun asyncTest() { // 1 -> 4 -> 2 -> 3
         Log.e(TAG, "1>>>" + System.currentTimeMillis())
-        async(UI) {
+        val deferred = async(UI) {
             Log.e(TAG, "2>>>" + System.currentTimeMillis())
             (findViewById<TextView>(R.id.textView)).text = loadCats().await()
             Log.e(TAG, "3>>>" + System.currentTimeMillis())
         }
-        Log.e(TAG, "4>>>" + System.currentTimeMillis())
+        Log.e(TAG, "4>>>$deferred" + System.currentTimeMillis())
     }
 
     private fun runBlockingTest() { // 1 -> -, blocks the starting thread
